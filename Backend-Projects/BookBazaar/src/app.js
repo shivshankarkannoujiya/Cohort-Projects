@@ -2,8 +2,25 @@ import express from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import morgan from "morgan";
+import rateLimit from "express-rate-limit";
+import helmet from "helmet";
+import hpp from "hpp";
+import mongoSanitize from "express-mongo-sanitize";
 
 const app = express();
+
+// Global Rate Limiter
+const limiter = rateLimit({
+    windowMs: 15 * 60 * 1000,
+    limit: 100,
+    message: "Too Many reuest from this IP, Please try later ",
+});
+
+// Security Middleware
+app.use(helmet());
+app.use(hpp());
+app.use(mongoSanitize());
+app.use("/api", limiter);
 
 if (process.env.NODE_ENV === "development") {
     app.use(morgan("dev"));
@@ -11,10 +28,18 @@ if (process.env.NODE_ENV === "development") {
 
 app.use(
     cors({
-        origin: process.env.BASE_URL,
+        origin: process.env.BASE_URL || "http://localhost:5173",
         credentials: true,
         methods: ["GET", "POST", "DELETE", "OPTIONS"],
-        allowedHeaders: ["Content-Type", "Authorization"],
+        allowedHeaders: [
+            "Content-Type",
+            "Authorization",
+            "X-Requested-With",
+            "device-remember-token",
+            "Access-Control-Allow-Origin",
+            "Origin",
+            "Accept",
+        ],
     }),
 );
 app.use(express.json({ limit: "16kb" }));
