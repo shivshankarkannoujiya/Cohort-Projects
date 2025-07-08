@@ -47,7 +47,7 @@ app.use(express.urlencoded({ extended: true, limit: "16kb" }));
 app.use(cookieParser());
 
 // Global Error Handler
-app.use((err, _, res, _) => {
+app.use((err, _, res, next) => {
     console.log(err.stack);
     res.status(err.status || 500).json({
         status: "error",
