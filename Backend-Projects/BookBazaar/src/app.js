@@ -47,7 +47,7 @@ app.use(express.urlencoded({ extended: true, limit: "16kb" }));
 app.use(cookieParser());
 
 // Global Error Handler
-app.use((err, req, res, next) => {
+app.use((err, _, res, _) => {
     console.log(err.stack);
     res.status(err.status || 500).json({
         status: "error",
@@ -56,7 +56,11 @@ app.use((err, req, res, next) => {
     });
 });
 
-// API Routes
+//import routes
+import authRouter from "./routes/auth.routes.js";
+
+// routes
+app.use("/api/v1/users", authRouter);
 
 // Handle 404
 app.use((_, res) => {
