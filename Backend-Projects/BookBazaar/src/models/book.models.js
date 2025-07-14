@@ -31,6 +31,12 @@ const bookSchema = new mongoose.Schema(
             required: true,
         },
 
+        createdBy: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "User",
+            required: true,
+        },
+
         coverImageUrl: {
             type: String,
         },

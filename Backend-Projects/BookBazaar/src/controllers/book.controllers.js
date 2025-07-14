@@ -134,4 +134,4 @@ const deleteBookByBookId = asyncHandler(async (req, res) => {
     );
 });
 
-export { addBook, listAllBooks, getBookDetailsByBookId, deleteBookByBookId };
+export { addBook, listAllBooks, getBookDetailsByBookId,updateBook, deleteBookByBookId };
