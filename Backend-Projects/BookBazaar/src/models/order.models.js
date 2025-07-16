@@ -27,6 +27,7 @@ const orderSchema = new mongoose.Schema(
         totalAmount: {
             type: Number,
             min: 0,
+            required: true,
         },
 
         status: {
@@ -95,7 +96,16 @@ const orderSchema = new mongoose.Schema(
                 required: true,
             },
         },
+
+        deliveredAt: {
+            type: Date,
+        },
     },
     { timestamps: true },
 );
+
+orderSchema.index({ user: 1 });
+orderSchema.index({ "cancelled.isCancelled": 1 });
+orderSchema.index({ status: 1 });
+
 export const Order = mongoose.model("Order", orderSchema);
