@@ -5,6 +5,7 @@ const bookSchema = new mongoose.Schema(
         title: {
             type: String,
             required: true,
+            trim: true,
         },
 
         author: {
@@ -14,6 +15,7 @@ const bookSchema = new mongoose.Schema(
 
         description: {
             type: String,
+            trim: true,
         },
 
         price: {
@@ -29,6 +31,7 @@ const bookSchema = new mongoose.Schema(
         genre: {
             type: String,
             required: true,
+            trim: true,
         },
 
         createdBy: {

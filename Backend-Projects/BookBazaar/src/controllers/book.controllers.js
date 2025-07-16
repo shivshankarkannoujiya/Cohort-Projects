@@ -33,6 +33,7 @@ const addBook = asyncHandler(async (req, res) => {
         price,
         stockQuantity,
         genre,
+        createdBy: req.user?._id,
         coverImageUrl,
     });
 
@@ -56,7 +57,7 @@ const listAllBooks = asyncHandler(async (_, res) => {
 
 const getBookDetailsByBookId = asyncHandler(async (req, res) => {
     const { bookId } = req.params;
-    if (!booksId) {
+    if (!bookId) {
         throw new ApiError(401, "Id is required");
     }
 
@@ -77,7 +78,7 @@ const getBookDetailsByBookId = asyncHandler(async (req, res) => {
 
 const updateBook = asyncHandler(async (req, res) => {
     const { title, description, price, stockQuantity, genre } = req.body;
-    const { bookId } = req.body;
+    const { bookId } = req.params;
 
     if (!bookId) {
         throw new ApiError(401, "Id is required");
@@ -104,7 +105,7 @@ const updateBook = asyncHandler(async (req, res) => {
         { new: true },
     );
 
-    if (!updateBook) {
+    if (!updatedBook) {
         throw new ApiError(404, "Book not found");
     }
 
@@ -129,9 +130,15 @@ const deleteBookByBookId = asyncHandler(async (req, res) => {
         throw new ApiError(404, "Book not found");
     }
 
-    return res.status(
-        new ApiResponse(200, deletedBook, "Book deleted successfully"),
-    );
+    return res
+        .status(200)
+        .json(new ApiResponse(200, deletedBook, "Book deleted successfully"));
 });
 
-export { addBook, listAllBooks, getBookDetailsByBookId,updateBook, deleteBookByBookId };
+export {
+    addBook,
+    listAllBooks,
+    getBookDetailsByBookId,
+    updateBook,
+    deleteBookByBookId,
+};
