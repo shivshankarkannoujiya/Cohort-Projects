@@ -1,6 +1,11 @@
 import mongoose from "mongoose";
+import {
+    AvailablePaymentMethods,
+    AvailablePaymentStatus,
+    PaymentStatusEnum,
+} from "../utils/constant";
 
-const payemntSchema = new mongoose.Schema(
+const paymentSchema = new mongoose.Schema(
     {
         order: {
             type: mongoose.Schema.Types.ObjectId,
@@ -8,27 +13,32 @@ const payemntSchema = new mongoose.Schema(
             required: true,
         },
 
-        paymentMethod: {
-            type: String,
-            enum: ["credit_card", "paypal", "upi", "mock_gateway"],
-            required: true,
-        },
-
         amount: {
             type: Number,
+            required: true,
+            min: [0, "Amount must be positive"],
+        },
+
+        paymentMethod: {
+            type: String,
+            enum: AvailablePaymentMethods,
             required: true,
         },
 
         status: {
             type: String,
-            enum: ["initiated", "successful", "failed"],
-            default: "initiated",
+            enum: AvailablePaymentStatus,
+            default: PaymentStatusEnum.INITIATED,
         },
 
         transactionId: {
             type: String,
         },
+
+        paidAt: {
+            type: Date,
+        },
     },
     { timestamps: true },
 );
-export const Payment = mongoose.model("Payment", payemntSchema);
+export const Payment = mongoose.model("Payment", paymentSchema);
