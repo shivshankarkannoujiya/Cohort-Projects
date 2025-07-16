@@ -46,8 +46,8 @@ const listReviewOfBook = asyncHandler(async (req, res) => {
         .sort({ createdAt: -1 })
         .populate("user", "name");
 
-    if (!reviews) {
-        throw new ApiError(404, "No Reviews Found");
+    if (reviews.length === 0) {
+        throw new ApiError(404, "No reviews found");
     }
 
     return res
