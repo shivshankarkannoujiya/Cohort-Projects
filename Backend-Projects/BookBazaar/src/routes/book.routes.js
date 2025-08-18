@@ -9,6 +9,7 @@ import {
     deleteBookByBookId,
 } from "../controllers/book.controllers.js";
 import { verifyJWT } from "../middlewares/auth.middleware.js";
+import { verifyApiKey } from "../middlewares/apikey.middleware.js";
 
 const router = Router();
 
@@ -19,7 +20,7 @@ router
 
 router
     .route("/:id")
-    .get(verifyJWT, getBookDetailsByBookId)
+    .get(verifyJWT, verifyApiKey, getBookDetailsByBookId)
     .put(verifyJWT, validatePermission([UserRolesEnum.ADMIN]), updateBook)
     .put(
         verifyJWT,
