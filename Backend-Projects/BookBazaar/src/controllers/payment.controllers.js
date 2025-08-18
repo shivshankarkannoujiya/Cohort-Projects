@@ -1,5 +1,5 @@
-import { Order } from "../models/order.models";
-import { Payment } from "../models/payments.models";
+import { Order } from "../models/order.models.js";
+import { Payment } from "../models/payments.models.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 import { ApiError } from "../utils/apiError.js";
 import { ApiResponse } from "../utils/apiResponse.js";

@@ -67,8 +67,8 @@ import paymentRouter from "./routes/payment.routes.js";
 // routes
 app.use("/api/v1/users", authRouter);
 app.use("/api/v1/books", bookRouter);
-app.use("/api/v1/orders", orderRouter);
 app.use("/api/v1/reviews", reviewRouter);
+app.use("/api/v1/orders", orderRouter);
 app.use("/api/v1/carts", cartRouter);
 app.use("/api/v1/payments", paymentRouter);
 

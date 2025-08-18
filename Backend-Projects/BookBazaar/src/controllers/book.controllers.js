@@ -1,8 +1,8 @@
 import mongoose from "mongoose";
-import { Book } from "../models/book.models";
-import { ApiError } from "../utils/apiError";
-import { ApiResponse } from "../utils/apiResponse";
-import { asyncHandler } from "../utils/asyncHandler";
+import { Book } from "../models/book.models.js";
+import { ApiError } from "../utils/apiError.js";
+import { ApiResponse } from "../utils/apiResponse.js";
+import { asyncHandler } from "../utils/asyncHandler.js";
 
 const addBook = asyncHandler(async (req, res) => {
     const {

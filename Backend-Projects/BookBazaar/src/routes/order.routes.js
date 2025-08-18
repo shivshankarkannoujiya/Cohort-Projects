@@ -13,6 +13,6 @@ const router = Router();
 router.route("/placeOrder").post(verifyJWT, placeOrder);
 router.route("/listOrder").get(verifyJWT, verifyApiKey, listUserOrders);
 router.route("/:orderId").get(verifyJWT, getOrderDetailByOrderId);
-router.route("/:orderId/cancel").get(verifyJWT, cancelOrder);
+router.route("/:orderId/cancel").delete(verifyJWT, cancelOrder);
 
 export default router;

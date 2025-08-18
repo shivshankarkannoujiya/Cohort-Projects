@@ -10,6 +10,6 @@ const router = Router();
 
 router.route("/:bookId").post(verifyJWT, addReviewToBook);
 router.route("/:bookId/review").get(listReviewOfBook);
-router.route("/review/:reviewId").get(verifyJWT, deleteReviewOfBook);
+router.route("/:reviewId").delete(verifyJWT, deleteReviewOfBook);
 
 export default router;

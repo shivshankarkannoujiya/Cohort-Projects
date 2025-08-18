@@ -3,7 +3,7 @@ import {
     AvailablePaymentMethods,
     AvailablePaymentStatus,
     PaymentStatusEnum,
-} from "../utils/constant";
+} from "../utils/constant.js";
 
 const paymentSchema = new mongoose.Schema(
     {

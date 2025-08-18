@@ -14,7 +14,7 @@ const router = Router();
 router.route("/register").post(registerUser);
 router.route("/login").post(loginUser);
 router.route("/me").get(verifyJWT, getCurrentUser);
-router.route("/refresh-accessToken").post(verifyJWT, refreshAccessToken);
+router.route("/refresh-accessToken").post(refreshAccessToken);
 router.route("/change-password").put(verifyJWT, changeCurrentPassword);
 router.route("/logout").post(verifyJWT, logoutUser);
 

@@ -22,7 +22,7 @@ router
     .route("/:id")
     .get(verifyJWT, verifyApiKey, getBookDetailsByBookId)
     .put(verifyJWT, validatePermission([UserRolesEnum.ADMIN]), updateBook)
-    .put(
+    .delete(
         verifyJWT,
         validatePermission([UserRolesEnum.ADMIN]),
         deleteBookByBookId,

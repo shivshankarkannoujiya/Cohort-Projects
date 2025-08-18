@@ -1,4 +1,4 @@
-import { CartItem } from "../models/cart-item.models";
+import { CartItem } from "../models/cart-item.models.js";
 import { Book } from "../models/book.models.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 import { ApiResponse } from "../utils/apiResponse.js";
