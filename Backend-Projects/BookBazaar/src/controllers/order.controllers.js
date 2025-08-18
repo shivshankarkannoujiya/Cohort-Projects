@@ -25,7 +25,6 @@ const placeOrder = asyncHandler(async (req, res) => {
         throw new ApiError(400, "Complete shipping address is required");
     }
 
-    // calculate totalAmount
     let totalAmount = 0;
 
     for (const item of orderItems) {

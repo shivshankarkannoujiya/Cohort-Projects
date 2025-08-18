@@ -17,6 +17,11 @@ const apikeySchema = new mongoose.Schema(
         expiresAt: {
             type: Date,
         },
+
+        is_active: {
+            type: Boolean,
+            default: true,
+        },
     },
     { timestamps: true },
 );
