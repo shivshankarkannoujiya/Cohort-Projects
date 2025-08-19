@@ -4,6 +4,7 @@ import { ApiError } from "../utils/apiError.js";
 import { ApiResponse } from "../utils/apiResponse.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 import { OrderStatusEnum, UserRolesEnum } from "../utils/constant.js";
+import { sendEmail, orderConfirmationMailGenContent } from "../utils/mail.js";
 
 const placeOrder = asyncHandler(async (req, res) => {
     const { orderItems, shippingAddress } = req.body;
@@ -43,14 +44,22 @@ const placeOrder = asyncHandler(async (req, res) => {
         totalAmount,
     });
 
+     const placedOrder = await Order.findById(order._id)
+        .populate("orderItems.book", "title price author");
+
+    await sendEmail({
+        email: req.user.email,
+        subject: `Order Confirmation - #${order._id}`,
+        mailGenContent: orderConfirmationMailGenContent(req.user.name, order),
+    });
+
     return res
         .status(201)
-        .json(new ApiResponse(201, order, "Order placed successfully"));
+        .json(new ApiResponse(201, placedOrder, "Order placed successfully"));
 });
 
-
 const listUserOrders = asyncHandler(async (req, res) => {
-    const userId = req.user?._id
+    const userId = req.user?._id;
     const orders = await Order.find({ user: userId })
         .sort({ createdAt: -1 })
         .populate("orderItems.book", "title price author");
