@@ -7,6 +7,7 @@ const OrderStatusEnum = {
     PENDING: "pending",
     COMPLETED: "completed",
     CANCELLED: "cancelled",
+    SHIPPED: "shipped"
 };
 
 const PaymentMethodEnum = {

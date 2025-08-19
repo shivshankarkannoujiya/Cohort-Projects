@@ -48,6 +48,7 @@ const placeOrder = asyncHandler(async (req, res) => {
         .json(new ApiResponse(201, order, "Order placed successfully"));
 });
 
+// TODO: FIX
 const listUserOrders = asyncHandler(async (req, res) => {
     const orders = await Order.find({ user: req.user?._id })
         .sort({ createdAt: -1 })
@@ -111,6 +112,10 @@ const cancelOrder = asyncHandler(async (req, res) => {
         throw new ApiError(400, "Completed orders cannot be cancelled");
     }
 
+     if (order.status === OrderStatusEnum.SHIPPED) {
+        throw new ApiError(400, "Shipped orders cannot be cancelled");
+    }
+
     if (order.cancelled?.isCancelled) {
         throw new ApiError(400, "This order is already cancelled");
     }
@@ -123,7 +128,7 @@ const cancelOrder = asyncHandler(async (req, res) => {
         cancelledBy: req.user?._id,
     };
 
-    order.save({ validateBeforeSave: false });
+    await order.save({ validateBeforeSave: false });
 
     return res
         .status(200)
