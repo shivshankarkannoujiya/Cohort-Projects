@@ -1,0 +1,604 @@
+{
+	"info": {
+		"_postman_id": "c0ab711b-9980-4e1b-bdd9-740746fc0cd3",
+		"name": "BookBazaar",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "38659407"
+	},
+	"item": [
+		{
+			"name": "user",
+			"item": [
+				{
+					"name": "register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"name\": \"admin\",\r\n   \"email\": \"ad@gmail.com\",\r\n   \"password\": \"12345678\",\r\n   \"role\": \"admin\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BookBazaar}}/users/register",
+							"host": [
+								"{{BookBazaar}}"
+							],
+							"path": [
+								"users",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n      \"email\": \"ad@gmail.com\",\r\n   \"password\": \"12345678\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BookBazaar}}/users/login",
+							"host": [
+								"{{BookBazaar}}"
+							],
+							"path": [
+								"users",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "current_user",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BookBazaar}}/users/me",
+							"host": [
+								"{{BookBazaar}}"
+							],
+							"path": [
+								"users",
+								"me"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update_password",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"oldPassword\": \"12345678\",\r\n   \"newPassword\": \"123456789\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BookBazaar}}/users/change-password",
+							"host": [
+								"{{BookBazaar}}"
+							],
+							"path": [
+								"users",
+								"change-password"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "logout",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{BookBazaar}}/users/logout",
+							"host": [
+								"{{BookBazaar}}"
+							],
+							"path": [
+								"users",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "refresh_access_Token",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{BookBazaar}}/users/refresh-accessToken",
+							"host": [
+								"{{BookBazaar}}"
+							],
+							"path": [
+								"users",
+								"refresh-accessToken"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "api_key",
+			"item": [
+				{
+					"name": "generate_api_key",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{BookBazaar}}/apis",
+							"host": [
+								"{{BookBazaar}}"
+							],
+							"path": [
+								"apis"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "book",
+			"item": [
+				{
+					"name": "addBook",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"title\": \"Refactoring\",\r\n  \"author\": \"Martin Fowler\",\r\n  \"price\": 45,\r\n  \"stockQuantity\": 10,\r\n  \"genre\": \"Technology\"\r\n}\r\n\r\n\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BookBazaar}}/books",
+							"host": [
+								"{{BookBazaar}}"
+							],
+							"path": [
+								"books"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "listAllBooks",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BookBazaar}}/books",
+							"host": [
+								"{{BookBazaar}}"
+							],
+							"path": [
+								"books"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "BookDetailsByBookId",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-api-key",
+								"value": "1d22b539d88496c95ad19e0d2e17158314e61d7e06b64b0ffd26671e8f0a9cf3",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{BookBazaar}}/books/68a41fcabccf2a7ba060577b",
+							"host": [
+								"{{BookBazaar}}"
+							],
+							"path": [
+								"books",
+								"68a41fcabccf2a7ba060577b"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateBook",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"title\": \"Updated Book Title\",\r\n  \"description\": \"A revised description of the book.\",\r\n  \"price\": 299,\r\n  \"stockQuantity\": 75,\r\n  \"genre\": \"Fantasy\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BookBazaar}}/books/68a41fcabccf2a7ba060577b",
+							"host": [
+								"{{BookBazaar}}"
+							],
+							"path": [
+								"books",
+								"68a41fcabccf2a7ba060577b"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateBook Copy",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{BookBazaar}}/books/68a42040bccf2a7ba060577f",
+							"host": [
+								"{{BookBazaar}}"
+							],
+							"path": [
+								"books",
+								"68a42040bccf2a7ba060577f"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "review",
+			"item": [
+				{
+					"name": "addReview",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"rating\": 4,\r\n   \"comment\": \"This is an amazing book!\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BookBazaar}}/reviews/68a41fcabccf2a7ba060577b",
+							"host": [
+								"{{BookBazaar}}"
+							],
+							"path": [
+								"reviews",
+								"68a41fcabccf2a7ba060577b"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "listReview",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BookBazaar}}/reviews/68a41fcabccf2a7ba060577b/review",
+							"host": [
+								"{{BookBazaar}}"
+							],
+							"path": [
+								"reviews",
+								"68a41fcabccf2a7ba060577b",
+								"review"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteReview",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{BookBazaar}}/reviews/68a4277d132ce769f484ae36",
+							"host": [
+								"{{BookBazaar}}"
+							],
+							"path": [
+								"reviews",
+								"68a4277d132ce769f484ae36"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "order",
+			"item": [
+				{
+					"name": "place_Order",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"orderItems\": [\r\n    {\r\n      \"book\": \"68a41fcabccf2a7ba060577b\",\r\n      \"quantity\": 2\r\n    },\r\n    {\r\n      \"book\": \"68a42081bccf2a7ba0605783\",\r\n      \"quantity\": 1\r\n    }\r\n  ],\r\n  \"shippingAddress\": {\r\n    \"fullName\": \"John Doe\",\r\n    \"phone\": \"9876543210\",\r\n    \"addressLine1\": \"123, MG Road\",\r\n    \"city\": \"Bangalore\",\r\n    \"state\": \"Karnataka\",\r\n    \"postalCode\": \"560001\",\r\n    \"country\": \"India\"\r\n  }\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BookBazaar}}/orders/placeOrder",
+							"host": [
+								"{{BookBazaar}}"
+							],
+							"path": [
+								"orders",
+								"placeOrder"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "listUserOrders",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-api-key",
+								"value": "1d22b539d88496c95ad19e0d2e17158314e61d7e06b64b0ffd26671e8f0a9cf3",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{BookBazaar}}/orders/listOrder",
+							"host": [
+								"{{BookBazaar}}"
+							],
+							"path": [
+								"orders",
+								"listOrder"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getOrderDetails",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BookBazaar}}/orders/68a4293ec5df1e31374eff3a",
+							"host": [
+								"{{BookBazaar}}"
+							],
+							"path": [
+								"orders",
+								"68a4293ec5df1e31374eff3a"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "cancel_Order",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{BookBazaar}}/orders/68a4293ec5df1e31374eff3a/cancel",
+							"host": [
+								"{{BookBazaar}}"
+							],
+							"path": [
+								"orders",
+								"68a4293ec5df1e31374eff3a",
+								"cancel"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "payment",
+			"item": [
+				{
+					"name": "create_payment",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"orderId\": \"68a4b263bc9b621cdb054914\",\r\n   \"amount\": 643\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BookBazaar}}/payments/create",
+							"host": [
+								"{{BookBazaar}}"
+							],
+							"path": [
+								"payments",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "verify_payment",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"paymentId\": \"pay_246c27a00dc39b1ce7430fed\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BookBazaar}}/payments/verify",
+							"host": [
+								"{{BookBazaar}}"
+							],
+							"path": [
+								"payments",
+								"verify"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "cart",
+			"item": [
+				{
+					"name": "add_items_to_cart",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"bookId\": \"68a42081bccf2a7ba0605783\",\r\n   \"quantity\": 5\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BookBazaar}}/carts/add",
+							"host": [
+								"{{BookBazaar}}"
+							],
+							"path": [
+								"carts",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get_cart_items",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BookBazaar}}/carts",
+							"host": [
+								"{{BookBazaar}}"
+							],
+							"path": [
+								"carts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update_cart_items",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"quantity\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BookBazaar}}/carts/68a4c6bc7c388492446853f1",
+							"host": [
+								"{{BookBazaar}}"
+							],
+							"path": [
+								"carts",
+								"68a4c6bc7c388492446853f1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "remove_cart_item",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{BookBazaar}}/carts/68a4c6bc7c388492446853f1",
+							"host": [
+								"{{BookBazaar}}"
+							],
+							"path": [
+								"carts",
+								"68a4c6bc7c388492446853f1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
