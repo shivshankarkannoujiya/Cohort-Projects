@@ -29,6 +29,6 @@ export const verifyApiKey = asyncHandler(async (req, res, next) => {
         throw new ApiError(401, "API Key has expired");
     }
 
-    req.user = { id: existingApiKey.user };
+    req.user = { _id: existingApiKey.user };
     next();
 });

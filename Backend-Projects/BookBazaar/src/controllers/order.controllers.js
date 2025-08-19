@@ -48,9 +48,10 @@ const placeOrder = asyncHandler(async (req, res) => {
         .json(new ApiResponse(201, order, "Order placed successfully"));
 });
 
-// TODO: FIX
+
 const listUserOrders = asyncHandler(async (req, res) => {
-    const orders = await Order.find({ user: req.user?._id })
+    const userId = req.user?._id
+    const orders = await Order.find({ user: userId })
         .sort({ createdAt: -1 })
         .populate("orderItems.book", "title price author");
 
