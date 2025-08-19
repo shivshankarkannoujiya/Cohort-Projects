@@ -29,7 +29,6 @@ const userSchema = new mongoose.Schema(
             type: String,
             required: [true, "password is required"],
             minLength: [8, "password must be atleast 8 character"],
-            select: false,
         },
 
         role: {
@@ -39,8 +38,8 @@ const userSchema = new mongoose.Schema(
         },
 
         refreshToken: {
-            type: String
-        }
+            type: String,
+        },
     },
     { timestamps: true },
 );
@@ -55,7 +54,7 @@ userSchema.methods.isPasswordCorrect = async function (password) {
     return await bcrypt.compare(password, this.password);
 };
 
-userSchema.methods.generateAccessToken = async function () {
+userSchema.methods.generateAccessToken = function () {
     try {
         return jwt.sign(
             {
@@ -71,7 +70,7 @@ userSchema.methods.generateAccessToken = async function () {
     }
 };
 
-userSchema.methods.generateRefreshToken = async function () {
+userSchema.methods.generateRefreshToken = function () {
     try {
         return jwt.sign(
             {

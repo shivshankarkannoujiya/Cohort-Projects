@@ -25,9 +25,16 @@ const registerUser = asyncHandler(async (req, res) => {
         password,
     });
 
+    const createdUser = await User.findById(user._id).select("-password");
+    if (!createdUser) {
+        throw new ApiError(404, "Error while creating User");
+    }
+
     return res
         .status(201)
-        .json(new ApiResponse(201, user, "User registered successfully"));
+        .json(
+            new ApiResponse(201, createdUser, "User registered successfully"),
+        );
 });
 
 const loginUser = asyncHandler(async (req, res) => {
@@ -50,6 +57,7 @@ const loginUser = asyncHandler(async (req, res) => {
     const { accessToken, refreshToken } = await generateAccessAndRefreshToken(
         user._id,
     );
+    console.table([accessToken, refreshToken])
     const loggedInUser = await User.findById(user._id).select(
         "-password -refreshToken",
     );
@@ -77,7 +85,8 @@ const refreshAccessToken = asyncHandler(async (req, res) => {
     const incommingRefreshToken =
         req.cookies.refreshToken || req.body.refreshToken;
 
-    if (incommingRefreshToken) {
+    console.log("INCOMMING: ", incommingRefreshToken)
+    if (!incommingRefreshToken) {
         throw new ApiError(401, "Refresh Token is required");
     }
 
@@ -89,15 +98,15 @@ const refreshAccessToken = asyncHandler(async (req, res) => {
 
         const user = await User.findById(decodedToken._id);
         if (!user) {
-            throw new ApiError(401, "Invalid refresh Toekn");
+            throw new ApiError(401, "Invalid refresh Token");
         }
 
-        if (!incommingRefreshToken !== user?.refreshToken) {
-            throw new ApiError(401, "Invalid refresh Toekn");
+        if (incommingRefreshToken !== user?.refreshToken) {
+            throw new ApiError(401, "Invalid refresh Token");
         }
 
         const { accessToken, refreshToken: newRefreshToken } =
-            generateAccessAndRefreshToken(user._id);
+            await generateAccessAndRefreshToken(user._id);
 
         return res
             .status(200)
@@ -113,7 +122,7 @@ const refreshAccessToken = asyncHandler(async (req, res) => {
     } catch (error) {
         throw new ApiError(
             500,
-            "Soomething went wrong while refreshing access token",
+            "Something went wrong while refreshing access token",
         );
     }
 });
@@ -121,8 +130,8 @@ const refreshAccessToken = asyncHandler(async (req, res) => {
 const changeCurrentPassword = asyncHandler(async (req, res) => {
     const { oldPassword, newPassword } = req.body;
     const user = await User.findById(req.user?._id);
-
-    const isPasswordValid = await user.isPassworCorrect(oldPassword);
+    console.log("USER: ", user)
+    const isPasswordValid = await user.isPasswordCorrect(oldPassword);
     if (!isPasswordValid) {
         throw new ApiError(401, "Old password is Incorrect");
     }
