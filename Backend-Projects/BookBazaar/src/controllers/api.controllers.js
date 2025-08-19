@@ -8,10 +8,10 @@ const generateNewApiKey = asyncHandler(async (req, res) => {
     try {
         const user = req?.user;
 
-        const newApiKey = crypto.randomBytes(32).toString("hex");
+        const rawApiKey = crypto.randomBytes(32).toString("hex");
         const hashedApiKey = crypto
             .createHash("sha256")
-            .update(newApiKey)
+            .update(rawApiKey)
             .digest("hex");
 
         const apiKey = await ApiKey.create({
@@ -25,7 +25,7 @@ const generateNewApiKey = asyncHandler(async (req, res) => {
             new ApiResponse(
                 200,
                 {
-                    apiKey,
+                    rawApiKey,
                     expiresAt: apiKey.expiresAt,
                 },
                 "New API key generated successfully. Please save it",

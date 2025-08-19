@@ -19,7 +19,7 @@ router
     .get(verifyJWT, listAllBooks);
 
 router
-    .route("/:id")
+    .route("/:bookId")
     .get(verifyJWT, verifyApiKey, getBookDetailsByBookId)
     .put(verifyJWT, validatePermission([UserRolesEnum.ADMIN]), updateBook)
     .delete(
