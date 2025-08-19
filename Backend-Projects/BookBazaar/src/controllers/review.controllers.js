@@ -68,7 +68,6 @@ const deleteReviewOfBook = asyncHandler(async (req, res) => {
         throw new ApiError(404, "Review No found");
     }
 
-    // Check Ownership
     if (review.user.toString() !== req.user?._id.toString()) {
         throw new ApiError(403, "You can only delete your own review");
     }
