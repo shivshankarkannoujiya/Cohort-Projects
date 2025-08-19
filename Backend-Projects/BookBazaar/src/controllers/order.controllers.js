@@ -90,7 +90,7 @@ const getOrderDetailByOrderId = asyncHandler(async (req, res) => {
 
 const cancelOrder = asyncHandler(async (req, res) => {
     const { orderId } = req.params;
-    const { reason } = req.body;
+    const { reason } = req.body || "";
 
     if (!orderId) {
         throw new ApiError(400, "Order ID is required");
@@ -112,7 +112,7 @@ const cancelOrder = asyncHandler(async (req, res) => {
         throw new ApiError(400, "Completed orders cannot be cancelled");
     }
 
-     if (order.status === OrderStatusEnum.SHIPPED) {
+    if (order.status === OrderStatusEnum.SHIPPED) {
         throw new ApiError(400, "Shipped orders cannot be cancelled");
     }
 

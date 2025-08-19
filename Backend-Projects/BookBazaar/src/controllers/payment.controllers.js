@@ -67,7 +67,7 @@ const verifyPayment = asyncHandler(async (req, res) => {
 
         payment.status = PaymentStatusEnum.SUCCESSFULL;
         payment.paidAt = new Date();
-        await Payment.bulkSave();
+        await payment.save();
 
         const order = await Order.findById(payment.order);
         if (order) {
